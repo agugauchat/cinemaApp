@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Cinema App</string>
+    <string name="title_home">Home</string>
+    <string name="title_bookings">My bookings</string>
+</resources>
