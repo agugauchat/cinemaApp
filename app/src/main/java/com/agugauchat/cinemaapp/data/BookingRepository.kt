@@ -22,9 +22,7 @@ class BookingRepository @Inject constructor(
         bookingDao.removeBooking(id)
     }
 
-    // ToDo -> Implementar una función para validar si hay lugar en la sala
-    // pasándole la capacidad máxima, la cantidad actual y los otros datos para hacer la query
-    /*suspend fun checkFavorite(idNews: String): Int {
-        return newsDAO.checkNews(idNews)
-    }*/
+    suspend fun getOccupiedSeats(room: Int, date: String, movie: String): Int? {
+        return bookingDao.getOccupiedSeats(room, date, movie)
+    }
 }

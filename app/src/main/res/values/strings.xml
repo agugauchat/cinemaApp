@@ -1,5 +1,26 @@
 <resources>
     <string name="app_name">Cinema App</string>
-    <string name="title_home">Home</string>
-    <string name="title_bookings">My bookings</string>
+    <string name="title_home">Nueva compra</string>
+    <string name="title_bookings">Mis boletos</string>
+    <string name="buyer_id_title">DNI:</string>
+    <string name="buyer_id_hint">Ingrese su DNI</string>
+    <string name="room_title">Sala:</string>
+    <string name="room_name">Sala %d</string>
+    <string name="movie_title">Película:</string>
+    <string name="date_title">Fecha:</string>
+    <string name="date_hint">Seleccione una fecha</string>
+    <string name="date_format">dd/MM/yyyy</string>
+    <string name="default_tickets_quantity">1</string>
+    <string name="total_price">Valor total: $%.2f</string>
+    <string name="buy">Comprar</string>
+    <string name="quantity_title">Cantidad de Entradas:</string>
+    <string name="buy_confirm">¿Desea confirmar su compra?</string>
+    <string name="accept">Aceptar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="status_success_message">Compra realizada exitosamente.</string>
+    <string name="status_generic_error_message">Ha ocurrido un error, reintente más tarde.</string>
+    <string name="status_no_seats_message">No hay más asientos disponibles, reintente otra sala o día.</string>
+    <string name="status_conversion_error_message">Ingrese los datos correctamente.</string>
+    <string name="status_incomplete_data_message">Complete todos los campos.</string>
 </resources>

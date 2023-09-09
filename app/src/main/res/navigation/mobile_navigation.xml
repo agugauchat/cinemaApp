@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.agugauchat.cinemaapp.ui.home.HomeFragment"
+        android:name="com.agugauchat.cinemaapp.ui.home.BuyTicketsFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_buy_tickets" />
 
     <fragment
         android:id="@+id/navigation_bookings"

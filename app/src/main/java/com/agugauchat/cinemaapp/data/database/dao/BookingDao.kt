@@ -16,4 +16,7 @@ interface BookingDao {
 
     @Query("DELETE FROM booking_table WHERE id = :id")
     suspend fun removeBooking(id: String): Int
+
+    @Query("SELECT SUM(quantity) FROM booking_table WHERE cinema_room = :room AND date = :date AND movie = :movie")
+    suspend fun getOccupiedSeats(room: Int, date: String, movie: String): Int?
 }
