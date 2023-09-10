@@ -90,12 +90,16 @@ class BuyTicketsFragment : Fragment() {
                 viewModel.quantity.value = s.toString()
             }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
             }
 
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
             }
         })
 
@@ -115,12 +119,15 @@ class BuyTicketsFragment : Fragment() {
                     STATUS_SUCCESS -> {
                         text = getString(R.string.status_success_message)
                     }
+
                     STATUS_NO_SEATS -> {
                         text = getString(R.string.status_no_seats_message)
                     }
+
                     STATUS_CONVERSION_ERROR -> {
                         text = getString(R.string.status_conversion_error_message)
                     }
+
                     STATUS_INCOMPLETE_DATA -> {
                         text = getString(R.string.status_incomplete_data_message)
                     }

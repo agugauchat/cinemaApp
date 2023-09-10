@@ -26,7 +26,7 @@ class BookingsViewModel @Inject constructor(
         }
     }
 
-    fun deleteBooking(id : Int) {
+    fun deleteBooking(id: Int) {
         viewModelScope.launch {
             deleteBookingUseCase(id)
 

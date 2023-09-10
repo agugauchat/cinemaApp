@@ -12,4 +12,5 @@ class Booking(
     val total_price: Double
 )
 
-fun BookingEntity.toDomain() = Booking(id, buyer_id, cinema_room, movie, date, quantity, total_price)
+fun BookingEntity.toDomain() =
+    Booking(id, buyer_id, cinema_room, movie, date, quantity, total_price)

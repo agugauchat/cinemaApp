@@ -15,6 +15,11 @@ class CinemaInfoRepository @Inject constructor() {
             RateVariation(6, 1.4),
             RateVariation(7, 1.4)
         )
-        return CinemaInfo(rooms_quantity = 4, rooms_capacity = 60, ticket_cost = 1000.0, rateVariations)
+        return CinemaInfo(
+            rooms_quantity = 4,
+            rooms_capacity = 60,
+            ticket_cost = 1000.0,
+            rateVariations
+        )
     }
 }
