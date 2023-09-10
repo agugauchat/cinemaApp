@@ -1,0 +1,65 @@
+<!-- booking_item_layout.xml -->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp"
+        android:paddingHorizontal="8dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/booking_title"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Movie - room" />
+
+            <TextView
+                android:id="@+id/booking_date"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="dd/MM/yyyy" />
+
+            <TextView
+                android:id="@+id/booking_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="quantity: 1" />
+
+            <TextView
+                android:id="@+id/buyer_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Buyer_id = 000000" />
+
+            <TextView
+                android:id="@+id/booking_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="$10000" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:contentDescription="@string/delete"
+            android:src="@android:drawable/ic_delete" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

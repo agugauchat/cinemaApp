@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Cinema App</string>
+    <string name="app_name">Cine App</string>
     <string name="title_home">Nueva compra</string>
     <string name="title_bookings">Mis boletos</string>
     <string name="buyer_id_title">DNI:</string>
@@ -12,9 +12,12 @@
     <string name="date_format">dd/MM/yyyy</string>
     <string name="default_tickets_quantity">1</string>
     <string name="total_price">Valor total: $%.2f</string>
+    <string name="price_holder">$ %.2f</string>
     <string name="buy">Comprar</string>
     <string name="quantity_title">Cantidad de Entradas:</string>
     <string name="buy_confirm">¿Desea confirmar su compra?</string>
+    <string name="delete">Eliminar</string>
+    <string name="delete_confirm">¿Está seguro de eliminar la reserva?</string>
     <string name="accept">Aceptar</string>
     <string name="confirm">Confirmar</string>
     <string name="cancel">Cancelar</string>
@@ -23,4 +26,7 @@
     <string name="status_no_seats_message">No hay más asientos disponibles, reintente otra sala o día.</string>
     <string name="status_conversion_error_message">Ingrese los datos correctamente.</string>
     <string name="status_incomplete_data_message">Complete todos los campos.</string>
+    <string name="booking_title_holder">%s - Sala %d</string>
+    <string name="buyer_id_holder">DNI: %d</string>
+    <string name="quantity_holder">Cantidad de entradas: %d</string>
 </resources>

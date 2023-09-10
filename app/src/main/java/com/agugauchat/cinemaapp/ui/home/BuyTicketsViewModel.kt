@@ -19,6 +19,7 @@ import com.agugauchat.cinemaapp.ui.utils.toDayOfWeek
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.ceil
 
 @HiltViewModel
 class BuyTicketsViewModel @Inject constructor(
@@ -58,8 +59,10 @@ class BuyTicketsViewModel @Inject constructor(
             cinemaInfo.value?.rate_variations?.find { it.day_of_week == dayOfWeek }?.price_percentage
                 ?: 1.0
 
-        if (ticketsQuantity > 0 && ticketBaseCost > 0) {
-            totalPrice.value = ticketsQuantity * ticketBaseCost * pricePercentage
+        if (dayOfWeek != null && ticketsQuantity > 0 && ticketBaseCost > 0) {
+            totalPrice.value = ceil(ticketsQuantity * ticketBaseCost * pricePercentage)
+        } else {
+            totalPrice.value = 0.0
         }
     }
 
