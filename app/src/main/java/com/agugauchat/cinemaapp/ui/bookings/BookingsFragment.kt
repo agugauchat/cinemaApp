@@ -26,12 +26,9 @@ class BookingsFragment : Fragment() {
 
         viewModel.onCreate()
         viewModel.bookingList.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) {
-                val adapter = BookingAdapter(requireContext(), it, removeBookingClickListener())
-                binding.bookingsRecyclerView.adapter = adapter
-                binding.bookingsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-            }
+            val adapter = BookingAdapter(requireContext(), it, removeBookingClickListener())
+            binding.bookingsRecyclerView.adapter = adapter
+            binding.bookingsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
 
         return root
