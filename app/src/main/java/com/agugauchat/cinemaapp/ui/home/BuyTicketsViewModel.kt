@@ -75,11 +75,11 @@ class BuyTicketsViewModel @Inject constructor(
         }
 
         val cinemaRoomNumber = extractCinemaRoomNumber(room)
-        val quantityValue = quantity.toIntOrNull()
+        val quantityValue = quantity.toIntOrNull() ?: 0
         val buyerIdValue = buyerId.toIntOrNull()
         val maximumCapacity = cinemaInfo.value?.rooms_capacity ?: 0
 
-        if (cinemaRoomNumber == null || quantityValue == null || buyerIdValue == null) {
+        if (cinemaRoomNumber == null || quantityValue < 1 || buyerIdValue == null) {
             statusEvent.postValue(STATUS_CONVERSION_ERROR)
             return
         }
