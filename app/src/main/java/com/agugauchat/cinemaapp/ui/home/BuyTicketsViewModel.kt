@@ -50,7 +50,7 @@ class BuyTicketsViewModel @Inject constructor(
         totalPrice.addSource(quantity) { recalculatePrice() }
     }
 
-    private fun recalculatePrice() {
+    fun recalculatePrice() {
         val dayOfWeek = date.value.toDayOfWeek()
 
         val ticketsQuantity = quantity.value?.toIntOrNull() ?: 1
@@ -114,7 +114,7 @@ class BuyTicketsViewModel @Inject constructor(
         statusEvent.value = null
     }
 
-    private fun extractCinemaRoomNumber(room: String): Int? {
+    fun extractCinemaRoomNumber(room: String): Int? {
         val regex = Regex("\\d+")
         val matchResult = regex.find(room)
         return matchResult?.value?.toIntOrNull()

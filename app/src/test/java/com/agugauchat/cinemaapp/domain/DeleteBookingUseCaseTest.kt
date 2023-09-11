@@ -1,5 +1,6 @@
+package com.agugauchat.cinemaapp.domain
+
 import com.agugauchat.cinemaapp.data.BookingRepository
-import com.agugauchat.cinemaapp.domain.DeleteBookingUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -10,7 +11,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 
-class DeleteBookingUseCaseTest {
+internal class DeleteBookingUseCaseTest {
 
     @MockK
     private lateinit var bookingRepository: BookingRepository
