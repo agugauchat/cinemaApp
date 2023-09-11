@@ -2,7 +2,8 @@
 
 Android app with MVVM architecture.
 
-<img src="https://github.com/agugauchat/cinemaApp/assets/18156523/ca95a6f8-7caa-4ee7-9bc8-cbde1e69a708" alt="drawing" width="400"/>
+<img src="https://github.com/agugauchat/cinemaApp/assets/18156523/183236aa-ff25-415c-b7da-a4e864be91ac" alt="drawing" width="400"/>
+
 
 Apk [here](https://drive.google.com/file/d/1VZlNK_MQ1GC8KLsclAP_b-V2IPL7LKtb/view?usp=sharing).
 
