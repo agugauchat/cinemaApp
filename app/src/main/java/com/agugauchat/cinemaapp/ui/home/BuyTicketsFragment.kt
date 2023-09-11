@@ -1,7 +1,7 @@
 package com.agugauchat.cinemaapp.ui.home
 
-import android.R.layout.simple_spinner_item
 import android.R.layout.simple_spinner_dropdown_item
+import android.R.layout.simple_spinner_item
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -23,9 +23,11 @@ import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
-import java.util.Locale
 
 @AndroidEntryPoint
 class BuyTicketsFragment : Fragment() {
@@ -73,12 +75,14 @@ class BuyTicketsFragment : Fragment() {
                 )
 
             val datePicker = builder.build()
-            val dateFormat = SimpleDateFormat(getString(R.string.date_format), Locale.getDefault())
+            val formatter = DateTimeFormatter.ofPattern(getString(R.string.date_format))
 
             datePicker.addOnPositiveButtonClickListener {
-                val date = dateFormat.format(it)
-                binding.date.setText(date)
-                viewModel.date.value = date
+                val utcDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(it), ZoneOffset.UTC)
+                val formattedDate = utcDate.format(formatter)
+
+                binding.date.setText(formattedDate)
+                viewModel.date.value = formattedDate
             }
 
             datePicker.show(parentFragmentManager, DATE_PICKER_DIALOG_TAG)
