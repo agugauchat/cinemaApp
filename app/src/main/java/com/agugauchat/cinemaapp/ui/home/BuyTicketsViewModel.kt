@@ -69,7 +69,7 @@ class BuyTicketsViewModel @Inject constructor(
     fun buyTickets(movie: String, room: String, date: String, quantity: String, buyerId: String) {
         val totalPrice = totalPrice.value
 
-        if (!allNotNull(movie, room, date, quantity, buyerId, totalPrice)) {
+        if (!allNotNull(movie, room, date, quantity, buyerId, totalPrice) || date.isEmpty()) {
             statusEvent.postValue(STATUS_INCOMPLETE_DATA)
             return
         }
@@ -107,7 +107,6 @@ class BuyTicketsViewModel @Inject constructor(
                 statusEvent.postValue(STATUS_NO_SEATS)
             }
         }
-
     }
 
     fun clearStatusEvent() {
