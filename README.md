@@ -2,7 +2,8 @@
 
 Android app with MVVM architecture.
 
-<img src="https://github.com/agugauchat/cinemaApp/assets/18156523/ca95a6f8-7caa-4ee7-9bc8-cbde1e69a708" alt="drawing" width="400"/>
+<img src="https://github.com/agugauchat/cinemaApp/assets/18156523/818360e9-281a-43d6-afdf-71f5c0004ad7" alt="drawing" width="400"/>
+
 
 Apk [here](https://drive.google.com/file/d/1VZlNK_MQ1GC8KLsclAP_b-V2IPL7LKtb/view?usp=sharing).
 
@@ -20,5 +21,4 @@ As an iteration of the app,  the list of movies could be fetched from a web serv
 This can be achieved without the need to modify the UI layer; you just need to update the implementation in the corresponding repository.
 
 
-#### **Author:** Augusto Gauchat
-#### **Email:** agu.gauchat@gmail.com
+#### **Author:** Augusto Gauchat (agu.gauchat@gmail.com)
