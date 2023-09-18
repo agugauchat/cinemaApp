@@ -4,10 +4,9 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.agugauchat.cinemaapp.domain.CreateBookingUseCase
-import com.agugauchat.cinemaapp.domain.GetCinemaInfoUseCase
-import com.agugauchat.cinemaapp.domain.GetMoviesUseCase
-import com.agugauchat.cinemaapp.domain.GetOccupiedSeatsUseCase
+import com.agugauchat.cinemaapp.domain.BookingsUseCases
+import com.agugauchat.cinemaapp.domain.CinemaInfoUseCases
+import com.agugauchat.cinemaapp.domain.MoviesUseCases
 import com.agugauchat.cinemaapp.domain.model.Booking
 import com.agugauchat.cinemaapp.domain.model.CinemaInfo
 import com.agugauchat.cinemaapp.ui.utils.UtilsUi.STATUS_CONVERSION_ERROR
@@ -23,10 +22,9 @@ import kotlin.math.ceil
 
 @HiltViewModel
 class BuyTicketsViewModel @Inject constructor(
-    private val getMoviesUseCase: GetMoviesUseCase,
-    private val getCinemaInfoUseCase: GetCinemaInfoUseCase,
-    private val createBookingUseCase: CreateBookingUseCase,
-    private val getOccupiedSeatsUseCase: GetOccupiedSeatsUseCase
+    private val moviesUseCases: MoviesUseCases,
+    private val cinemaInfoUseCases: CinemaInfoUseCases,
+    private val bookingsUseCases: BookingsUseCases
 ) : ViewModel() {
 
     val movieList = MutableLiveData<List<String>>()
@@ -39,11 +37,11 @@ class BuyTicketsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val result = getMoviesUseCase()
+            val result = moviesUseCases.getMovies()
             movieList.postValue(result)
         }
         viewModelScope.launch {
-            val result = getCinemaInfoUseCase()
+            val result = cinemaInfoUseCases.getCinemaInfo()
             cinemaInfo.postValue(result)
         }
         totalPrice.addSource(date) { recalculatePrice() }
@@ -85,12 +83,12 @@ class BuyTicketsViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            val occupiedSeats = getOccupiedSeatsUseCase(cinemaRoomNumber, date, movie) ?: 0
+            val occupiedSeats = bookingsUseCases.getOccupiedSeats(cinemaRoomNumber, date, movie) ?: 0
 
             val hasAvailableSeats = maximumCapacity - occupiedSeats >= quantityValue
             if (hasAvailableSeats) {
                 viewModelScope.launch {
-                    createBookingUseCase(
+                    bookingsUseCases.createBooking(
                         Booking(
                             movie = movie,
                             cinema_room = cinemaRoomNumber,

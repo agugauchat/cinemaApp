@@ -8,27 +8,27 @@ import io.mockk.impl.annotations.MockK
 import org.junit.Before
 import org.junit.Test
 
-internal class GetMoviesUseCaseTest {
+internal class MoviesUseCasesTest {
 
     @MockK
     private lateinit var movieRepository: MovieRepository
 
-    lateinit var getMoviesUseCase: GetMoviesUseCase
+    lateinit var moviesUseCases: MoviesUseCases
 
     @Before
     fun onBefore() {
         MockKAnnotations.init(this)
-        getMoviesUseCase = GetMoviesUseCase(movieRepository)
+        moviesUseCases = MoviesUseCases(movieRepository)
     }
 
     @Test
-    fun `invoke should return movies and call repository once`() {
+    fun `getMovies should return movies and call repository once`() {
         // Given
         val movies = listOf("Avatar", "Back to the Future", "Iron Man", "Scarface", "Titanic")
         coEvery { movieRepository.getMovies() } returns movies
 
         // When
-        val result = getMoviesUseCase()
+        val result = moviesUseCases.getMovies()
 
         // Then
         coVerify(exactly = 1) { movieRepository.getMovies() }

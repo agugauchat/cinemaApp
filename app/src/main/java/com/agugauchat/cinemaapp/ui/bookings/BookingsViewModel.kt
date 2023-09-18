@@ -3,8 +3,7 @@ package com.agugauchat.cinemaapp.ui.bookings
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.agugauchat.cinemaapp.domain.DeleteBookingUseCase
-import com.agugauchat.cinemaapp.domain.GetBookingsUseCase
+import com.agugauchat.cinemaapp.domain.BookingsUseCases
 import com.agugauchat.cinemaapp.domain.model.Booking
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -12,15 +11,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BookingsViewModel @Inject constructor(
-    private val getBookingsUseCase: GetBookingsUseCase,
-    private val deleteBookingUseCase: DeleteBookingUseCase
+    private val bookingsUseCases: BookingsUseCases
 ) : ViewModel() {
 
     val bookingList = MutableLiveData<List<Booking>>()
 
     fun onCreate() {
         viewModelScope.launch {
-            val result = getBookingsUseCase()
+            val result = bookingsUseCases.getBookings()
 
             bookingList.postValue(result)
         }
@@ -28,9 +26,9 @@ class BookingsViewModel @Inject constructor(
 
     fun deleteBooking(id: Int) {
         viewModelScope.launch {
-            deleteBookingUseCase(id)
+            bookingsUseCases.deleteBooking(id)
 
-            val updatedBookings = getBookingsUseCase()
+            val updatedBookings = bookingsUseCases.getBookings()
             bookingList.postValue(updatedBookings)
         }
     }

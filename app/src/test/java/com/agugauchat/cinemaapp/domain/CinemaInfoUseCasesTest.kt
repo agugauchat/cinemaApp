@@ -10,17 +10,17 @@ import io.mockk.impl.annotations.MockK
 import org.junit.Before
 import org.junit.Test
 
-internal class GetCinemaInfoUseCaseTest {
+internal class CinemaInfoUseCasesTest {
 
     @MockK
     private lateinit var cinemaInfoRepository: CinemaInfoRepository
 
-    lateinit var getCinemaInfoUseCase: GetCinemaInfoUseCase
+    lateinit var cinemaInfoUseCases: CinemaInfoUseCases
 
     @Before
     fun onBefore() {
         MockKAnnotations.init(this)
-        getCinemaInfoUseCase = GetCinemaInfoUseCase(cinemaInfoRepository)
+        cinemaInfoUseCases = CinemaInfoUseCases(cinemaInfoRepository)
     }
 
     @Test
@@ -38,7 +38,7 @@ internal class GetCinemaInfoUseCaseTest {
         coEvery { cinemaInfoRepository.getCinemaInfo() } returns cinemaInfo
 
         // When
-        val result = getCinemaInfoUseCase()
+        val result = cinemaInfoUseCases.getCinemaInfo()
 
         // Then
         coVerify(exactly = 1) { cinemaInfoRepository.getCinemaInfo() }

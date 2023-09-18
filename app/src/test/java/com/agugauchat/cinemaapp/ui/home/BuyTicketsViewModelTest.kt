@@ -1,10 +1,9 @@
 package com.agugauchat.cinemaapp.ui.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.agugauchat.cinemaapp.domain.CreateBookingUseCase
-import com.agugauchat.cinemaapp.domain.GetCinemaInfoUseCase
-import com.agugauchat.cinemaapp.domain.GetMoviesUseCase
-import com.agugauchat.cinemaapp.domain.GetOccupiedSeatsUseCase
+import com.agugauchat.cinemaapp.domain.BookingsUseCases
+import com.agugauchat.cinemaapp.domain.CinemaInfoUseCases
+import com.agugauchat.cinemaapp.domain.MoviesUseCases
 import com.agugauchat.cinemaapp.domain.model.CinemaInfo
 import com.agugauchat.cinemaapp.domain.model.RateVariation
 import com.agugauchat.cinemaapp.ui.utils.UtilsUi
@@ -32,16 +31,13 @@ internal class BuyTicketsViewModelTest {
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @RelaxedMockK
-    private lateinit var getMoviesUseCase: GetMoviesUseCase
+    private lateinit var moviesUseCases: MoviesUseCases
 
     @RelaxedMockK
-    private lateinit var getCinemaInfoUseCase: GetCinemaInfoUseCase
+    private lateinit var cinemaInfoUseCases: CinemaInfoUseCases
 
     @MockK
-    private lateinit var createBookingUseCase: CreateBookingUseCase
-
-    @MockK
-    private lateinit var getOccupiedSeatsUseCase: GetOccupiedSeatsUseCase
+    private lateinit var bookingsUseCases: BookingsUseCases
 
     private lateinit var viewModel: BuyTicketsViewModel
 
@@ -51,7 +47,7 @@ internal class BuyTicketsViewModelTest {
         Dispatchers.setMain(Dispatchers.Unconfined)
 
         viewModel = BuyTicketsViewModel(
-            getMoviesUseCase, getCinemaInfoUseCase, createBookingUseCase, getOccupiedSeatsUseCase
+            moviesUseCases, cinemaInfoUseCases, bookingsUseCases
         )
     }
 
@@ -70,12 +66,12 @@ internal class BuyTicketsViewModelTest {
             ticket_cost = 1000.0,
             rate_variations = emptyList()
         )
-        coEvery { getMoviesUseCase() } returns movies
-        coEvery { getCinemaInfoUseCase() } returns cinemaInfo
+        coEvery { moviesUseCases.getMovies() } returns movies
+        coEvery { cinemaInfoUseCases.getCinemaInfo() } returns cinemaInfo
 
         // When
         viewModel = BuyTicketsViewModel(
-            getMoviesUseCase, getCinemaInfoUseCase, createBookingUseCase, getOccupiedSeatsUseCase
+            moviesUseCases, cinemaInfoUseCases, bookingsUseCases
         )
 
         // Then
@@ -157,19 +153,19 @@ internal class BuyTicketsViewModelTest {
         viewModel.totalPrice.value = totalPrice
 
         coEvery {
-            getOccupiedSeatsUseCase(
+            bookingsUseCases.getOccupiedSeats(
                 cinemaRoomNumber,
                 bookingDate,
                 movieTitle
             )
         } returns occupiedSeats
-        coEvery { createBookingUseCase(any()) } coAnswers { }
+        coEvery { bookingsUseCases.createBooking(any()) } coAnswers { }
 
         // When
         viewModel.buyTickets(movieTitle, roomName, bookingDate, bookingQuantity, buyerIdentifier)
 
         // Then
-        coVerify(exactly = 1) { createBookingUseCase(any()) }
+        coVerify(exactly = 1) { bookingsUseCases.createBooking(any()) }
         assert(viewModel.statusEvent.value == UtilsUi.STATUS_SUCCESS)
     }
 
@@ -204,7 +200,7 @@ internal class BuyTicketsViewModelTest {
         val maximumCapacity = 60
         val occupiedSeats = 58
         viewModel.totalPrice.value = 4500.0
-        coEvery { getOccupiedSeatsUseCase(cinemaRoomNumber, date, movie) } returns occupiedSeats
+        coEvery { bookingsUseCases.getOccupiedSeats(cinemaRoomNumber, date, movie) } returns occupiedSeats
         val cinemaInfo = CinemaInfo(
             rooms_quantity = 4,
             rooms_capacity = maximumCapacity,

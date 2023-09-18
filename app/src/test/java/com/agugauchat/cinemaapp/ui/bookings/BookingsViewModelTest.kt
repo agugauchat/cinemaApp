@@ -1,8 +1,7 @@
 package com.agugauchat.cinemaapp.ui.bookings
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.agugauchat.cinemaapp.domain.DeleteBookingUseCase
-import com.agugauchat.cinemaapp.domain.GetBookingsUseCase
+import com.agugauchat.cinemaapp.domain.BookingsUseCases
 import com.agugauchat.cinemaapp.domain.model.Booking
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -25,10 +24,7 @@ internal class BookingsViewModelTest {
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @MockK
-    private lateinit var getBookingsUseCase: GetBookingsUseCase
-
-    @MockK
-    private lateinit var deleteBookingUseCase: DeleteBookingUseCase
+    private lateinit var bookingsUseCases: BookingsUseCases
 
     private lateinit var viewModel: BookingsViewModel
 
@@ -37,7 +33,7 @@ internal class BookingsViewModelTest {
         MockKAnnotations.init(this)
         Dispatchers.setMain(Dispatchers.Unconfined)
 
-        viewModel = BookingsViewModel(getBookingsUseCase, deleteBookingUseCase)
+        viewModel = BookingsViewModel(bookingsUseCases)
     }
 
     @After
@@ -68,7 +64,7 @@ internal class BookingsViewModelTest {
                 total_price = 1400.0
             ),
         )
-        coEvery { getBookingsUseCase() } returns bookings
+        coEvery { bookingsUseCases.getBookings() } returns bookings
 
         // When
         viewModel.onCreate()
@@ -81,7 +77,7 @@ internal class BookingsViewModelTest {
     fun `deleteBooking should call deleteBookingUseCase and update bookingList`() = runTest {
         // Given
         val bookingId = 1
-        coEvery { deleteBookingUseCase(bookingId) } answers { /* Do nothing */ }
+        coEvery { bookingsUseCases.deleteBooking(bookingId) } answers { /* Do nothing */ }
         val updatedBookings = listOf(
             Booking(
                 id = 2,
@@ -93,13 +89,13 @@ internal class BookingsViewModelTest {
                 total_price = 1400.0
             ),
         )
-        coEvery { getBookingsUseCase() } returns updatedBookings
+        coEvery { bookingsUseCases.getBookings() } returns updatedBookings
 
         // When
         viewModel.deleteBooking(bookingId)
 
         // Then
-        coVerify(exactly = 1) { deleteBookingUseCase(bookingId) }
+        coVerify(exactly = 1) { bookingsUseCases.deleteBooking(bookingId) }
         assert(viewModel.bookingList.value == updatedBookings)
     }
 }
